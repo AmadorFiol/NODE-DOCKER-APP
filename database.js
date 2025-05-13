@@ -1,5 +1,5 @@
 const sqlite3 = require("sqlite3").verbose();
-const dbPath = "/tmp/data.db";  // compatible con Railway
+const dbPath = "./data.db";  // compatible con Railway
 
 // Conectar a la base de datos (crea el archivo si no existe)
 const db = new sqlite3.Database(dbPath, (err) => {
