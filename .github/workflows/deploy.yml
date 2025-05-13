@@ -1,0 +1,26 @@
+name: Build and Push to Docker Hub
+
+on:
+  push:
+    branches:
+      - main  # Se ejecuta cuando hay cambios en la rama principal
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
+
+      - name: Iniciar sesión en Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Construir la imagen Docker
+        run: docker build -t amfibo/hello-docker:latest .
+
+      - name: Subir la imagen a Docker Hub
+        run: docker push amfibo/hello-docker:latest
